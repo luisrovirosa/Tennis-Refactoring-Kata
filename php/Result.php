@@ -22,9 +22,9 @@ class Result
     public function toString()
     {
         $score = "";
-        $hasSameScore = $this->player1->scores() == $this->player2->scores();
+        $hasSameScore = $this->player1->points() == $this->player2->points();
         if ($hasSameScore) {
-            switch ($this->player1->scores()) {
+            switch ($this->player1->points()) {
                 case 0:
                     $score = "Love-All";
                     break;
@@ -38,8 +38,8 @@ class Result
                     $score = "Deuce";
                     break;
             }
-        } elseif ($this->player1->scores() >= 4 || $this->player2->scores() >= 4) {
-            $minusResult = $this->player1->scores() - $this->player2->scores();
+        } elseif ($this->player1->points() >= 4 || $this->player2->points() >= 4) {
+            $minusResult = $this->player1->points() - $this->player2->points();
             if ($minusResult == 1) {
                 $score = "Advantage player1";
             } elseif ($minusResult == -1) {
@@ -52,10 +52,10 @@ class Result
         } else {
             for ($i = 1; $i < 3; $i++) {
                 if ($i == 1) {
-                    $tempScore = $this->player1->scores();
+                    $tempScore = $this->player1->points();
                 } else {
                     $score .= "-";
-                    $tempScore = $this->player2->scores();
+                    $tempScore = $this->player2->points();
                 }
                 switch ($tempScore) {
                     case 0:

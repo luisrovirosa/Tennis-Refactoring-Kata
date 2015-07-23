@@ -5,7 +5,7 @@ class Player
     /** @var string */
     private $name;
 
-    /** @var int */
+    /** @var Score */
     private $scores;
 
     /**
@@ -14,20 +14,20 @@ class Player
     public function __construct($name)
     {
         $this->name = $name;
-        $this->scores = 0;
+        $this->scores = new Score(0);
     }
 
     public function wonPoint()
     {
-        $this->scores++;
+        $this->scores = $this->scores->next();
     }
 
     /**
-     * @return int
+     * @return Score
      */
-    public function scores()
+    public function points()
     {
-        return $this->scores;
+        return $this->scores->points();
     }
 
     /**
