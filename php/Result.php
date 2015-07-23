@@ -24,22 +24,16 @@ class Result
     {
         if ($this->hasSameScore()) {
             $isDeuce = $this->firstScore()->points() >= self::FORTY_POINTS;
-            $result = $isDeuce ?
-                'Deuce' :
-                $this->firstScore()->toString() . '-All';
+            $result = $isDeuce ? 'Deuce' : "{$this->firstScore()}-All";
         } elseif ($this->haveBeenDeuce()) {
             $winningPlayerName = $this->firstScore()->greaterThan($this->secondScore()) ?
                 $this->firstPlayer->name() :
                 $this->secondPlayer->name();
-            if ($this->isFinished()) {
-                $result = "Win for $winningPlayerName";
-            } else {
-                $result = "Advantage $winningPlayerName";
-            }
+            $result = $this->isFinished() ?
+                "Win for $winningPlayerName" :
+                "Advantage $winningPlayerName";
         } else {
-            $result = $this->firstScore()->toString() .
-                '-' .
-                $this->secondScore()->toString();
+            $result = "{$this->firstScore()}-{$this->secondScore()}";
         }
         return $result;
     }
