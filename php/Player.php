@@ -3,17 +3,17 @@
 class Player
 {
     /** @var string */
-    private $playerName;
+    private $name;
 
     /** @var int */
     private $scores;
 
     /**
-     * @param $playerName
+     * @param $name
      */
-    public function __construct($playerName)
+    public function __construct($name)
     {
-        $this->playerName = $playerName;
+        $this->name = $name;
         $this->scores = 0;
     }
 
@@ -28,6 +28,14 @@ class Player
     public function scores()
     {
         return $this->scores;
+    }
+
+    /**
+     * @return string
+     */
+    public function name()
+    {
+        return $this->name;
     }
 
 }
