@@ -21,9 +21,7 @@ class Result
 
     public function toString()
     {
-        $hasSameScore = $this->firstPlayer->score()->points() == $this->secondPlayer->score(
-            )->points();
-        if ($hasSameScore) {
+        if ($this->hasSameScore()) {
             $isDeuce = $this->firstPlayer->score()->points() >= 3;
             $player1Score = $isDeuce ?
                 'Deuce' :
@@ -48,5 +46,14 @@ class Result
                 $this->secondPlayer->score()->toString();
         }
         return $player1Score;
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasSameScore()
+    {
+        $hasSameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
+        return $hasSameScore;
     }
 }
