@@ -21,7 +21,6 @@ class Result
 
     public function toString()
     {
-        $score = "";
         $hasSameScore = $this->player1->points() == $this->player2->points();
         if ($hasSameScore) {
             switch ($this->player1->points()) {
@@ -50,15 +49,9 @@ class Result
                 $score = "Win for player2";
             }
         } else {
-            for ($i = 1; $i < 3; $i++) {
-                if ($i == 1) {
-                    $tempScore = $this->player1->score();
-                } else {
-                    $score .= "-";
-                    $tempScore = $this->player2->score();
-                }
-                $score .= $tempScore;
-            }
+            $score = $this->player1->score() .
+                '-' .
+                $this->player2->score();
         }
         return $score;
     }
