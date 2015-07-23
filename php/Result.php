@@ -52,25 +52,12 @@ class Result
         } else {
             for ($i = 1; $i < 3; $i++) {
                 if ($i == 1) {
-                    $tempScore = $this->player1->points();
+                    $tempScore = $this->player1->score();
                 } else {
                     $score .= "-";
-                    $tempScore = $this->player2->points();
+                    $tempScore = $this->player2->score();
                 }
-                switch ($tempScore) {
-                    case 0:
-                        $score .= "Love";
-                        break;
-                    case 1:
-                        $score .= "Fifteen";
-                        break;
-                    case 2:
-                        $score .= "Thirty";
-                        break;
-                    case 3:
-                        $score .= "Forty";
-                        break;
-                }
+                $score .= $tempScore;
             }
         }
         return $score;

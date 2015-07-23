@@ -6,7 +6,7 @@ class Player
     private $name;
 
     /** @var Score */
-    private $scores;
+    private $score;
 
     /**
      * @param $name
@@ -14,20 +14,25 @@ class Player
     public function __construct($name)
     {
         $this->name = $name;
-        $this->scores = Score::love();
+        $this->score = Score::love();
     }
 
     public function wonPoint()
     {
-        $this->scores = $this->scores->next();
+        $this->score = $this->score->next();
     }
 
     /**
-     * @return Score
+     * @return int
      */
     public function points()
     {
-        return $this->scores->points();
+        return $this->score->points();
+    }
+
+    public function score()
+    {
+        return $this->score->toString();
     }
 
     /**
