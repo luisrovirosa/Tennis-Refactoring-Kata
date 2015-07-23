@@ -3,32 +3,32 @@
 class TennisGame1 implements TennisGame
 {
     /** @var  Player */
-    private $player1;
+    private $firstPlayer;
     /** @var  Player */
-    private $player2;
+    private $secondPlayer;
     /** @var Result */
-    private $score;
+    private $result;
 
-    public function __construct($player1Name, $player2Name)
+    public function __construct($firstPlayerName, $secondPlayerName)
     {
-        $this->player1 = new Player($player1Name);
-        $this->player2 = new Player($player2Name);
-        $this->score = new Result($this->player1, $this->player2);
+        $this->firstPlayer = new Player($firstPlayerName);
+        $this->secondPlayer = new Player($secondPlayerName);
+        $this->result = new Result($this->firstPlayer, $this->secondPlayer);
     }
 
     public function wonPoint($playerName)
     {
-        $isPlayer1 = $this->player1->name() == $playerName;
-        if ($isPlayer1) {
-            $this->player1->wonPoint();
+        $isFirstPlayer = $this->firstPlayer->name() == $playerName;
+        if ($isFirstPlayer) {
+            $this->firstPlayer->wonPoint();
         } else {
-            $this->player2->wonPoint();
+            $this->secondPlayer->wonPoint();
         }
     }
 
     public function getScore()
     {
-        return $this->score->toString();
+        return $this->result->toString();
     }
 }
 

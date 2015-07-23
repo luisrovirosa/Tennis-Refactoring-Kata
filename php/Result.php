@@ -3,46 +3,50 @@
 class Result
 {
     /** @var Player */
-    private $player1;
+    private $firstPlayer;
 
     /** @var Player */
-    private $player2;
+    private $secondPlayer;
 
     /**
      * Score constructor.
-     * @param $player1
-     * @param $player2
+     * @param $firstPlayer
+     * @param $secondPlayer
      */
-    public function __construct($player1, $player2)
+    public function __construct($firstPlayer, $secondPlayer)
     {
-        $this->player1 = $player1;
-        $this->player2 = $player2;
+        $this->firstPlayer = $firstPlayer;
+        $this->secondPlayer = $secondPlayer;
     }
 
     public function toString()
     {
-        $hasSameScore = $this->player1->points() == $this->player2->points();
+        $hasSameScore = $this->firstPlayer->score()->points() == $this->secondPlayer->score(
+            )->points();
         if ($hasSameScore) {
-            $isDeuce = $this->player1->points() >= 3;
-            $score = $isDeuce ?
+            $isDeuce = $this->firstPlayer->score()->points() >= 3;
+            $player1Score = $isDeuce ?
                 'Deuce' :
-                $this->player1->score() . '-All';
-        } elseif ($this->player1->points() >= 4 || $this->player2->points() >= 4) {
-            $minusResult = $this->player1->points() - $this->player2->points();
+                $this->firstPlayer->score()->toString() . '-All';
+        } elseif ($this->firstPlayer->score()->points() >= 4 || $this->secondPlayer->score(
+            )->points() >= 4
+        ) {
+            $minusResult = $this->firstPlayer->score()->points() - $this->secondPlayer->score(
+                )->points();
             if ($minusResult == 1) {
-                $score = "Advantage player1";
+                $player1Score = "Advantage player1";
             } elseif ($minusResult == -1) {
-                $score = "Advantage player2";
+                $player1Score = "Advantage player2";
             } elseif ($minusResult >= 2) {
-                $score = "Win for player1";
+                $player1Score = "Win for player1";
             } else {
-                $score = "Win for player2";
+                $player1Score = "Win for player2";
             }
         } else {
-            $score = $this->player1->score() .
+            $player1Score = $this->firstPlayer->score()->toString() .
                 '-' .
-                $this->player2->score();
+                $this->secondPlayer->score()->toString();
         }
-        return $score;
+        return $player1Score;
     }
 }

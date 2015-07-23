@@ -32,7 +32,7 @@ class Player
 
     public function score()
     {
-        return $this->score->toString();
+        return $this->score;
     }
 
     /**
