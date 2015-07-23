@@ -1,6 +1,6 @@
 <?php
 
-class Score
+class Result
 {
     /** @var Player */
     private $player1;
@@ -22,7 +22,8 @@ class Score
     public function toString()
     {
         $score = "";
-        if ($this->player1->scores() == $this->player2->scores()) {
+        $hasSameScore = $this->player1->scores() == $this->player2->scores();
+        if ($hasSameScore) {
             switch ($this->player1->scores()) {
                 case 0:
                     $score = "Love-All";

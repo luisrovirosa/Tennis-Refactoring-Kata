@@ -6,14 +6,14 @@ class TennisGame1 implements TennisGame
     private $player1;
     /** @var  Player */
     private $player2;
-    /** @var Score */
+    /** @var Result */
     private $score;
 
     public function __construct($player1Name, $player2Name)
     {
         $this->player1 = new Player($player1Name);
         $this->player2 = new Player($player2Name);
-        $this->score = new Score($this->player1, $this->player2);
+        $this->score = new Result($this->player1, $this->player2);
     }
 
     public function wonPoint($playerName)
