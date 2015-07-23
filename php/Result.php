@@ -29,8 +29,8 @@ class Result
                 $this->firstScore()->toString() . '-All';
         } elseif ($this->haveBeenDeuce()) {
             $winningPlayerName = $this->firstScore()->greaterThan($this->secondScore()) ?
-                "player1" :
-                "player2";
+                $this->firstPlayer->name() :
+                $this->secondPlayer->name();
             if ($this->isFinished()) {
                 $result = "Win for $winningPlayerName";
             } else {
