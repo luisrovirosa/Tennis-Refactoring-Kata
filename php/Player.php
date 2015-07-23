@@ -14,7 +14,7 @@ class Player
     public function __construct($name)
     {
         $this->name = $name;
-        $this->scores = new Score(0);
+        $this->scores = Score::love();
     }
 
     public function wonPoint()

@@ -8,9 +8,14 @@ class Score
      * Score constructor.
      * @param int $points
      */
-    public function __construct($points)
+    private function __construct($points)
     {
         $this->points = $points;
+    }
+
+    public static function love()
+    {
+        return new Score(0);
     }
 
     /**
