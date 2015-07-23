@@ -2,8 +2,6 @@
 
 class TennisGame1 implements TennisGame
 {
-    private $m_score1 = 0;
-    private $m_score2 = 0;
     /** @var  Player */
     private $player1;
     /** @var  Player */
@@ -18,17 +16,17 @@ class TennisGame1 implements TennisGame
     public function wonPoint($playerName)
     {
         if ('player1' == $playerName) {
-            $this->m_score1++;
+            $this->player1->wonPoint();
         } else {
-            $this->m_score2++;
+            $this->player2->wonPoint();
         }
     }
 
     public function getScore()
     {
         $score = "";
-        if ($this->m_score1 == $this->m_score2) {
-            switch ($this->m_score1) {
+        if ($this->player1->scores() == $this->player2->scores()) {
+            switch ($this->player1->scores()) {
                 case 0:
                     $score = "Love-All";
                     break;
@@ -42,8 +40,8 @@ class TennisGame1 implements TennisGame
                     $score = "Deuce";
                     break;
             }
-        } elseif ($this->m_score1 >= 4 || $this->m_score2 >= 4) {
-            $minusResult = $this->m_score1 - $this->m_score2;
+        } elseif ($this->player1->scores() >= 4 || $this->player2->scores() >= 4) {
+            $minusResult = $this->player1->scores() - $this->player2->scores();
             if ($minusResult == 1) {
                 $score = "Advantage player1";
             } elseif ($minusResult == -1) {
@@ -56,10 +54,10 @@ class TennisGame1 implements TennisGame
         } else {
             for ($i = 1; $i < 3; $i++) {
                 if ($i == 1) {
-                    $tempScore = $this->m_score1;
+                    $tempScore = $this->player1->scores();
                 } else {
                     $score .= "-";
-                    $tempScore = $this->m_score2;
+                    $tempScore = $this->player2->scores();
                 }
                 switch ($tempScore) {
                     case 0:
