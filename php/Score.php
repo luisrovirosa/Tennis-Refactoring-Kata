@@ -53,4 +53,9 @@ class Score
         return $this->name;
     }
 
+    public function greaterThan(Score $secondScore)
+    {
+        return $this->points > $secondScore->points;
+    }
+
 }

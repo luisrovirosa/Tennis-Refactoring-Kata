@@ -2,6 +2,7 @@
 
 class Result
 {
+    const FORTY_POINTS = 3;
     /** @var Player */
     private $firstPlayer;
 
@@ -22,30 +23,31 @@ class Result
     public function toString()
     {
         if ($this->hasSameScore()) {
-            $isDeuce = $this->firstPlayer->score()->points() >= 3;
-            $player1Score = $isDeuce ?
+            $isDeuce = $this->firstScore()->points() >= self::FORTY_POINTS;
+            $result = $isDeuce ?
                 'Deuce' :
-                $this->firstPlayer->score()->toString() . '-All';
-        } elseif ($this->firstPlayer->score()->points() >= 4 || $this->secondPlayer->score(
-            )->points() >= 4
-        ) {
-            $minusResult = $this->firstPlayer->score()->points() - $this->secondPlayer->score(
-                )->points();
-            if ($minusResult == 1) {
-                $player1Score = "Advantage player1";
-            } elseif ($minusResult == -1) {
-                $player1Score = "Advantage player2";
-            } elseif ($minusResult >= 2) {
-                $player1Score = "Win for player1";
+                $this->firstScore()->toString() . '-All';
+        } elseif ($this->haveBeenDeuce()) {
+            $isFirstPlayerWinning = $this->firstScore()->greaterThan($this->secondScore());
+            if ($this->isFinished()) {
+                if ($isFirstPlayerWinning) {
+                    $result = "Win for player1";
+                } else {
+                    $result = "Win for player2";
+                }
             } else {
-                $player1Score = "Win for player2";
+                if ($isFirstPlayerWinning) {
+                    $result = "Advantage player1";
+                } else {
+                    $result = "Advantage player2";
+                }
             }
         } else {
-            $player1Score = $this->firstPlayer->score()->toString() .
+            $result = $this->firstScore()->toString() .
                 '-' .
-                $this->secondPlayer->score()->toString();
+                $this->secondScore()->toString();
         }
-        return $player1Score;
+        return $result;
     }
 
     /**
@@ -53,7 +55,48 @@ class Result
      */
     private function hasSameScore()
     {
-        $hasSameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
-        return $hasSameScore;
+        return $this->firstPlayer->score() == $this->secondPlayer->score();
+    }
+
+    /**
+     * @return bool
+     */
+    private function haveBeenDeuce()
+    {
+        return $this->moreThanForty($this->firstScore())
+        || $this->moreThanForty($this->secondScore());
+    }
+
+    /**
+     * @return Score
+     */
+    private function firstScore()
+    {
+        $firstPlayerScore = $this->firstPlayer->score();
+        return $firstPlayerScore;
+    }
+
+    /**
+     * @return Score
+     */
+    private function secondScore()
+    {
+        $secondPlayerScore = $this->secondPlayer->score();
+        return $secondPlayerScore;
+    }
+
+    /**
+     * @param Score $score
+     * @return bool
+     */
+    private function moreThanForty(Score $score)
+    {
+        return $score->points() > self::FORTY_POINTS;
+    }
+
+    private function isFinished()
+    {
+        $difference = $this->firstScore()->points() - $this->secondScore()->points();
+        return abs($difference) >= 2;
     }
 }
