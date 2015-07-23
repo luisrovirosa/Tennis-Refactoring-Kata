@@ -23,20 +23,10 @@ class Result
     {
         $hasSameScore = $this->player1->points() == $this->player2->points();
         if ($hasSameScore) {
-            switch ($this->player1->points()) {
-                case 0:
-                    $score = "Love-All";
-                    break;
-                case 1:
-                    $score = "Fifteen-All";
-                    break;
-                case 2:
-                    $score = "Thirty-All";
-                    break;
-                default:
-                    $score = "Deuce";
-                    break;
-            }
+            $isDeuce = $this->player1->points() >= 3;
+            $score = $isDeuce ?
+                'Deuce' :
+                $this->player1->score() . '-All';
         } elseif ($this->player1->points() >= 4 || $this->player2->points() >= 4) {
             $minusResult = $this->player1->points() - $this->player2->points();
             if ($minusResult == 1) {
