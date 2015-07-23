@@ -13,7 +13,7 @@ class Result
      * @param $firstPlayer
      * @param $secondPlayer
      */
-    public function __construct($firstPlayer, $secondPlayer)
+    public function __construct(Player $firstPlayer, Player $secondPlayer)
     {
         $this->firstPlayer = $firstPlayer;
         $this->secondPlayer = $secondPlayer;
