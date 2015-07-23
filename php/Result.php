@@ -26,16 +26,12 @@ class Result
      */
     public function toString()
     {
-        if ($this->hasSameScore()) {
-            $isDeuce = $this->firstScore()->points() >= self::FORTY_POINTS;
-            $result = $isDeuce ? 'Deuce' : "{$this->firstScore()}-All";
-        } elseif ($this->haveBeenDeuce()) {
-            $winningPlayer = $this->winningPlayer();
-            $result = $this->isFinished() ?
-                "Win for $winningPlayer" :
-                "Advantage $winningPlayer";
+        if ($this->isTied()) {
+            $result = $this->tiedResult();
+        } elseif ($this->isWinningOrAdvantage()) {
+            $result = $this->winningOrAdvantageResult();
         } else {
-            $result = "{$this->firstScore()}-{$this->secondScore()}";
+            $result = $this->normalResult();
         }
         return $result;
     }
@@ -43,7 +39,7 @@ class Result
     /**
      * @return bool
      */
-    private function hasSameScore()
+    private function isTied()
     {
         return $this->firstPlayer->score() == $this->secondPlayer->score();
     }
@@ -51,7 +47,7 @@ class Result
     /**
      * @return bool
      */
-    private function haveBeenDeuce()
+    private function isWinningOrAdvantage()
     {
         return $this->moreThanForty($this->firstScore())
         || $this->moreThanForty($this->secondScore());
@@ -93,11 +89,39 @@ class Result
      */
     private function winningPlayer()
     {
-        if ($this->hasSameScore()) {
+        if ($this->isTied()) {
             return null;
         }
         return $this->firstScore()->greaterThan($this->secondScore()) ?
             $this->firstPlayer :
             $this->secondPlayer;
+    }
+
+    /**
+     * @return string
+     */
+    private function tiedResult()
+    {
+        $isDeuce = $this->firstScore()->points() >= self::FORTY_POINTS;
+        return $isDeuce ? 'Deuce' : "{$this->firstScore()}-All";
+    }
+
+    /**
+     * @return string
+     */
+    private function normalResult()
+    {
+        return "{$this->firstScore()}-{$this->secondScore()}";
+    }
+
+    /**
+     * @return string
+     */
+    private function winningOrAdvantageResult()
+    {
+        $winningPlayer = $this->winningPlayer();
+        return $this->isFinished() ?
+            "Win for $winningPlayer" :
+            "Advantage $winningPlayer";
     }
 }
