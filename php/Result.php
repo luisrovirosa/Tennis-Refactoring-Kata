@@ -28,19 +28,13 @@ class Result
                 'Deuce' :
                 $this->firstScore()->toString() . '-All';
         } elseif ($this->haveBeenDeuce()) {
-            $isFirstPlayerWinning = $this->firstScore()->greaterThan($this->secondScore());
+            $winningPlayerName = $this->firstScore()->greaterThan($this->secondScore()) ?
+                "player1" :
+                "player2";
             if ($this->isFinished()) {
-                if ($isFirstPlayerWinning) {
-                    $result = "Win for player1";
-                } else {
-                    $result = "Win for player2";
-                }
+                $result = "Win for $winningPlayerName";
             } else {
-                if ($isFirstPlayerWinning) {
-                    $result = "Advantage player1";
-                } else {
-                    $result = "Advantage player2";
-                }
+                $result = "Advantage $winningPlayerName";
             }
         } else {
             $result = $this->firstScore()->toString() .
