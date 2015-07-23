@@ -3,6 +3,7 @@
 class Result
 {
     const FORTY_POINTS = 3;
+
     /** @var Player */
     private $firstPlayer;
 
@@ -11,8 +12,8 @@ class Result
 
     /**
      * Score constructor.
-     * @param $firstPlayer
-     * @param $secondPlayer
+     * @param Player $firstPlayer
+     * @param Player $secondPlayer
      */
     public function __construct(Player $firstPlayer, Player $secondPlayer)
     {
@@ -20,18 +21,19 @@ class Result
         $this->secondPlayer = $secondPlayer;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         if ($this->hasSameScore()) {
             $isDeuce = $this->firstScore()->points() >= self::FORTY_POINTS;
             $result = $isDeuce ? 'Deuce' : "{$this->firstScore()}-All";
         } elseif ($this->haveBeenDeuce()) {
-            $winningPlayerName = $this->firstScore()->greaterThan($this->secondScore()) ?
-                $this->firstPlayer->name() :
-                $this->secondPlayer->name();
+            $winningPlayer = $this->winningPlayer();
             $result = $this->isFinished() ?
-                "Win for $winningPlayerName" :
-                "Advantage $winningPlayerName";
+                "Win for $winningPlayer" :
+                "Advantage $winningPlayer";
         } else {
             $result = "{$this->firstScore()}-{$this->secondScore()}";
         }
@@ -60,8 +62,7 @@ class Result
      */
     private function firstScore()
     {
-        $firstPlayerScore = $this->firstPlayer->score();
-        return $firstPlayerScore;
+        return $this->firstPlayer->score();
     }
 
     /**
@@ -69,8 +70,7 @@ class Result
      */
     private function secondScore()
     {
-        $secondPlayerScore = $this->secondPlayer->score();
-        return $secondPlayerScore;
+        return $this->secondPlayer->score();
     }
 
     /**
@@ -86,5 +86,18 @@ class Result
     {
         $difference = $this->firstScore()->points() - $this->secondScore()->points();
         return abs($difference) >= 2;
+    }
+
+    /**
+     * @return Player|null
+     */
+    private function winningPlayer()
+    {
+        if ($this->hasSameScore()) {
+            return null;
+        }
+        return $this->firstScore()->greaterThan($this->secondScore()) ?
+            $this->firstPlayer :
+            $this->secondPlayer;
     }
 }
