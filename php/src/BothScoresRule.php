@@ -1,11 +1,11 @@
 <?php
 
-class IsNormalRule extends TennisRule
+class BothScoresRule extends TennisRule
 {
 
     public function isMatch()
     {
-        return true;
+        return !$this->anyPlayerHaveMoreThanForty() && !$this->hasSameScore();
     }
 
     public function execute()

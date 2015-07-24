@@ -1,6 +1,6 @@
 <?php
 
-class IsWinningRule extends TennisRule
+class WinningRule extends TennisRule
 {
 
     public function isMatch()

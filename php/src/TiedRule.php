@@ -1,10 +1,10 @@
 <?php
 
-class IsTiedRule extends TennisRule
+class TiedRule extends TennisRule
 {
     public function isMatch()
     {
-        return $this->firstPlayer->score() == $this->secondPlayer->score();
+        return $this->hasSameScore();
     }
 
     public function execute()

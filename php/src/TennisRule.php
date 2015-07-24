@@ -85,4 +85,12 @@ abstract class TennisRule implements Rule
 
         return abs($difference) < 2;
     }
+
+    /**
+     * @return bool
+     */
+    protected function hasSameScore()
+    {
+        return $this->firstPlayer->score() == $this->secondPlayer->score();
+    }
 }

@@ -13,10 +13,10 @@ class Result
     public function __construct(Player $firstPlayer, Player $secondPlayer)
     {
         $this->rules = [
-            new IsTiedRule($firstPlayer, $secondPlayer),
-            new IsWinningRule($firstPlayer, $secondPlayer),
-            new IsAdvantageRule($firstPlayer, $secondPlayer),
-            new IsNormalRule($firstPlayer, $secondPlayer)
+            new BothScoresRule($firstPlayer, $secondPlayer),
+            new TiedRule($firstPlayer, $secondPlayer),
+            new WinningRule($firstPlayer, $secondPlayer),
+            new AdvantageRule($firstPlayer, $secondPlayer),
         ];
     }
 
