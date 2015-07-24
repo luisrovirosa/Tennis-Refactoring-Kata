@@ -23,7 +23,8 @@ class Result
         $this->firstPlayer = $firstPlayer;
         $this->secondPlayer = $secondPlayer;
         $this->rules = [
-            new IsTiedRule($firstPlayer, $secondPlayer)
+            new IsTiedRule($firstPlayer, $secondPlayer),
+            new IsWinningRule($firstPlayer, $secondPlayer)
         ];
     }
 
@@ -38,8 +39,8 @@ class Result
             }
         }
 
-        if ($this->isWinningOrAdvantage()) {
-            $result = $this->winningOrAdvantageResult();
+        if ($this->isAdvantage()) {
+            $result = $this->advantageResult();
         } else {
             $result = $this->normalResult();
         }
@@ -57,7 +58,7 @@ class Result
     /**
      * @return bool
      */
-    private function isWinningOrAdvantage()
+    private function isAdvantage()
     {
         return $this->moreThanForty($this->firstScore())
         || $this->moreThanForty($this->secondScore());
@@ -88,12 +89,6 @@ class Result
         return $score->points() > self::FORTY_POINTS;
     }
 
-    private function isFinished()
-    {
-        $difference = $this->firstScore()->points() - $this->secondScore()->points();
-        return abs($difference) >= 2;
-    }
-
     /**
      * @return Player|null
      */
@@ -118,11 +113,9 @@ class Result
     /**
      * @return string
      */
-    private function winningOrAdvantageResult()
+    private function advantageResult()
     {
         $winningPlayer = $this->winningPlayer();
-        return $this->isFinished() ?
-            "Win for $winningPlayer" :
-            "Advantage $winningPlayer";
+        return "Advantage $winningPlayer";
     }
 }
