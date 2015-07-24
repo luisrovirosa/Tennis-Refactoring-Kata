@@ -5,7 +5,7 @@ class IsWinningRule extends TennisRule
 
     public function isMatch()
     {
-        return $this->isFinished();
+        return $this->anyPlayerHaveMoreThanForty() && $this->haveAtLeast2PointsOfDifference();
     }
 
     public function execute()
@@ -13,33 +13,9 @@ class IsWinningRule extends TennisRule
         return "Win for " . $this->winningPlayer();
     }
 
-    private function isFinished()
+    private function haveAtLeast2PointsOfDifference()
     {
-        if (!($this->moreThanForty($this->firstScore()) ||
-            $this->moreThanForty($this->secondScore()))
-        ) {
-            return false;
-        }
-        $difference = $this->firstScore()->points() - $this->secondScore()->points();
-        return abs($difference) >= 2;
+        return !$this->haveLessThan2PointsOfDifference();
     }
 
-    /**
-     * @param Score $score
-     * @return bool
-     */
-    private function moreThanForty(Score $score)
-    {
-        return $score->points() > self::FORTY_POINTS;
-    }
-
-    /**
-     * @return Player|null
-     */
-    private function winningPlayer()
-    {
-        return $this->firstScore()->greaterThan($this->secondScore()) ?
-            $this->firstPlayer :
-            $this->secondPlayer;
-    }
 }

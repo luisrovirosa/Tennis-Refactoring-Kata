@@ -43,4 +43,46 @@ abstract class TennisRule implements Rule
     {
         return $this->secondPlayer->score();
     }
+
+    /**
+     * @return Player|null
+     */
+    protected function winningPlayer()
+    {
+        if ($this->firstScore() == $this->secondScore()) {
+            return null;
+        }
+
+        return $this->firstScore()->greaterThan($this->secondScore()) ?
+            $this->firstPlayer :
+            $this->secondPlayer;
+    }
+
+    /**
+     * @param Score $score
+     * @return bool
+     */
+    protected function moreThanForty(Score $score)
+    {
+        return $score->points() > TennisRule::FORTY_POINTS;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function anyPlayerHaveMoreThanForty()
+    {
+        return $this->moreThanForty($this->firstScore())
+        || $this->moreThanForty($this->secondScore());
+    }
+
+    /**
+     * @return bool
+     */
+    protected function haveLessThan2PointsOfDifference()
+    {
+        $difference = $this->firstScore()->points() - $this->secondScore()->points();
+
+        return abs($difference) < 2;
+    }
 }
