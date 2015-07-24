@@ -1,5 +1,13 @@
 <?php
 
+namespace TennisRefactoringKata\FirstRefactoring;
+
+use TennisRefactoringKata\FirstRefactoring\Rules\AdvantageRule;
+use TennisRefactoringKata\FirstRefactoring\Rules\BothScoresRule;
+use TennisRefactoringKata\FirstRefactoring\Rules\Rule;
+use TennisRefactoringKata\FirstRefactoring\Rules\TiedRule;
+use TennisRefactoringKata\FirstRefactoring\Rules\WinningRule;
+
 class Result
 {
     /** @var Rule[] */
@@ -22,7 +30,7 @@ class Result
 
     /**
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function toString()
     {
@@ -31,7 +39,7 @@ class Result
                 return $rule->execute();
             }
         }
-        throw new Exception('I don\'t know how the result');
+        throw new \Exception('I don\'t know how the result');
     }
 
 }

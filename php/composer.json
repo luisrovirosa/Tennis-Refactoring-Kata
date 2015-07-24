@@ -5,12 +5,8 @@
     },
     "autoload": {
         "psr-4": {
-            "": [
-                ".",
-                "src",
-                "src/rules",
-                "tests"
-            ]
+            "TennisRefactoringKata\\": "src",
+            "TennisRefactoringKata\\Test\\": "tests"
         }
     }
 }

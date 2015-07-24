@@ -1,5 +1,7 @@
 <?php
 
+namespace TennisRefactoringKata\FirstRefactoring;
+
 class Score
 {
     /** @var int */

@@ -1,5 +1,9 @@
 <?php
 
+namespace TennisRefactoringKata\Test;
+
+use TennisRefactoringKata\FirstRefactoring\TennisGame;
+
 /**
  * TennisGame1 test case.
  */
@@ -11,7 +15,7 @@ class TennisGame1Test extends TestMaster
     protected function setUp()
     {
         parent::setUp();
-        $this->_game = new TennisGame1('player1', 'player2');
+        $this->_game = new TennisGame('player1', 'player2');
     }
 
     /**

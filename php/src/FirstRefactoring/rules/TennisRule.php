@@ -1,4 +1,8 @@
 <?php
+namespace TennisRefactoringKata\FirstRefactoring\Rules;
+
+use TennisRefactoringKata\FirstRefactoring\Player;
+use TennisRefactoringKata\FirstRefactoring\Score;
 
 abstract class TennisRule implements Rule
 {

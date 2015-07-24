@@ -1,5 +1,7 @@
 <?php
 
+namespace TennisRefactoringKata\FirstRefactoring\Rules;
+
 class BothScoresRule extends TennisRule
 {
 

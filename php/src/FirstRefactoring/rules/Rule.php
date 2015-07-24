@@ -1,4 +1,5 @@
 <?php
+namespace TennisRefactoringKata\FirstRefactoring\Rules;
 
 interface Rule
 {

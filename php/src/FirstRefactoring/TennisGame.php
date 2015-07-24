@@ -1,6 +1,9 @@
 <?php
+namespace TennisRefactoringKata\FirstRefactoring;
 
-class TennisGame1 implements TennisGame
+use TennisRefactoringKata\TennisGame as BaseTennisGame;
+
+class TennisGame implements BaseTennisGame
 {
     /** @var  Player */
     private $firstPlayer;

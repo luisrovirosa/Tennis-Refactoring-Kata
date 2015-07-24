@@ -1,6 +1,10 @@
 <?php
 
-class TestMaster extends PHPUnit_Framework_TestCase
+namespace TennisRefactoringKata\Test;
+
+use TennisRefactoringKata\TennisGame;
+
+class TestMaster extends \PHPUnit_Framework_TestCase
 {
     /** @var TennisGame */
     protected $_game = null;

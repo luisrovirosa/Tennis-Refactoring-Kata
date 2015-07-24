@@ -1,5 +1,7 @@
 <?php
 
+namespace TennisRefactoringKata\FirstRefactoring\Rules;
+
 class TiedRule extends TennisRule
 {
     public function isMatch()

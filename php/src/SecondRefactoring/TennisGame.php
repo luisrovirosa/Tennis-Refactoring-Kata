@@ -1,6 +1,9 @@
 <?php
+namespace TennisRefactoringKata\SecondRefactoring;
 
-class TennisGame2 implements TennisGame
+use TennisRefactoringKata\TennisGame as BaseTennisGame;
+
+class TennisGame implements BaseTennisGame
 {
     private $P1point = 0;
     private $P2point = 0;
