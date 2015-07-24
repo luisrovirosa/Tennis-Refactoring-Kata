@@ -2,12 +2,6 @@
 
 class Result
 {
-    /** @var Player */
-    private $firstPlayer;
-
-    /** @var Player */
-    private $secondPlayer;
-
     /** @var Rule[] */
     private $rules;
 
@@ -18,17 +12,17 @@ class Result
      */
     public function __construct(Player $firstPlayer, Player $secondPlayer)
     {
-        $this->firstPlayer = $firstPlayer;
-        $this->secondPlayer = $secondPlayer;
         $this->rules = [
             new IsTiedRule($firstPlayer, $secondPlayer),
             new IsWinningRule($firstPlayer, $secondPlayer),
-            new IsAdvantageRule($firstPlayer, $secondPlayer)
+            new IsAdvantageRule($firstPlayer, $secondPlayer),
+            new IsNormalRule($firstPlayer, $secondPlayer)
         ];
     }
 
     /**
      * @return string
+     * @throws Exception
      */
     public function toString()
     {
@@ -37,32 +31,7 @@ class Result
                 return $rule->execute();
             }
         }
-
-        return $this->normalResult();
-    }
-
-    /**
-     * @return Score
-     */
-    private function firstScore()
-    {
-        return $this->firstPlayer->score();
-    }
-
-    /**
-     * @return Score
-     */
-    private function secondScore()
-    {
-        return $this->secondPlayer->score();
-    }
-
-    /**
-     * @return string
-     */
-    private function normalResult()
-    {
-        return "{$this->firstScore()}-{$this->secondScore()}";
+        throw new Exception('I don\'t know how the result');
     }
 
 }
