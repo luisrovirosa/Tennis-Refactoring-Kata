@@ -34,6 +34,15 @@ class Result
      */
     public function toString()
     {
+        return $this->result();
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    private function result()
+    {
         foreach ($this->rules as $rule) {
             if ($rule->isMatch()) {
                 return $rule->execute();

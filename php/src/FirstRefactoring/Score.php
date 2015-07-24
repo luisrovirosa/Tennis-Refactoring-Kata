@@ -6,6 +6,7 @@ class Score
 {
     /** @var int */
     private $points;
+
     /** @var  string */
     private $name;
 
@@ -22,13 +23,16 @@ class Score
         $this->name = $name;
     }
 
+    /**
+     * @return Score
+     */
     public static function love()
     {
         return new Score('Love', 0);
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function points()
     {
@@ -55,9 +59,13 @@ class Score
         return $this->name;
     }
 
-    public function greaterThan(Score $secondScore)
+    /**
+     * @param Score $otherScore
+     * @return bool
+     */
+    public function isGreaterThan(Score $otherScore)
     {
-        return $this->points > $secondScore->points;
+        return $this->points > $otherScore->points;
     }
 
     /**

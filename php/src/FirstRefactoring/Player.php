@@ -1,4 +1,5 @@
 <?php
+
 namespace TennisRefactoringKata\FirstRefactoring;
 
 class Player
@@ -31,6 +32,9 @@ class Player
         return $this->score->points();
     }
 
+    /**
+     * @return Score
+     */
     public function score()
     {
         return $this->score;

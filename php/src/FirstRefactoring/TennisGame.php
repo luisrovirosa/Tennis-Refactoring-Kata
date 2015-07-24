@@ -1,4 +1,5 @@
 <?php
+
 namespace TennisRefactoringKata\FirstRefactoring;
 
 use TennisRefactoringKata\TennisGame as BaseTennisGame;

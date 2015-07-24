@@ -8,10 +8,12 @@ abstract class TennisRule implements Rule
 {
 
     const FORTY_POINTS = 3;
+
     /**
      * @var Player
      */
     protected $firstPlayer;
+
     /**
      * @var Player
      */
@@ -57,7 +59,7 @@ abstract class TennisRule implements Rule
             return null;
         }
 
-        return $this->firstScore()->greaterThan($this->secondScore()) ?
+        return $this->firstScore()->isGreaterThan($this->secondScore()) ?
             $this->firstPlayer :
             $this->secondPlayer;
     }
