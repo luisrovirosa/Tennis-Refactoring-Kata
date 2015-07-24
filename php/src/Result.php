@@ -10,6 +10,9 @@ class Result
     /** @var Player */
     private $secondPlayer;
 
+    /** @var Rule[] */
+    private $rules;
+
     /**
      * Score constructor.
      * @param Player $firstPlayer
@@ -19,6 +22,9 @@ class Result
     {
         $this->firstPlayer = $firstPlayer;
         $this->secondPlayer = $secondPlayer;
+        $this->rules = [
+            new IsTiedRule($firstPlayer, $secondPlayer)
+        ];
     }
 
     /**
@@ -26,9 +32,13 @@ class Result
      */
     public function toString()
     {
-        if ($this->isTied()) {
-            $result = $this->tiedResult();
-        } elseif ($this->isWinningOrAdvantage()) {
+        foreach ($this->rules as $rule) {
+            if ($rule->isMatch()) {
+                return $rule->execute();
+            }
+        }
+
+        if ($this->isWinningOrAdvantage()) {
             $result = $this->winningOrAdvantageResult();
         } else {
             $result = $this->normalResult();
@@ -95,15 +105,6 @@ class Result
         return $this->firstScore()->greaterThan($this->secondScore()) ?
             $this->firstPlayer :
             $this->secondPlayer;
-    }
-
-    /**
-     * @return string
-     */
-    private function tiedResult()
-    {
-        $isDeuce = $this->firstScore()->points() >= self::FORTY_POINTS;
-        return $isDeuce ? 'Deuce' : "{$this->firstScore()}-All";
     }
 
     /**
