@@ -89,17 +89,18 @@ class TennisGame implements BaseTennisGame
             $score = "{$p1res}-{$p2res}";
         }
 
-        $winner = $this->firstPlayer->score() > $this->secondPlayer->score(
+        $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
         ) ? 'player1' : 'player2';
-        if ($this->bothHaveWinMoreThan(4)) {
-            $score = "Advantage $winner";
-        }
-
         $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
+
+        $isAdvantage = $this->bothHaveWinMoreThan(4) && abs($pointsDifference) < 2;
+        if ($isAdvantage) {
+            return "Advantage $winning";
+        }
 
         $gameIsOver = $this->bothHaveWinMoreThan(4) && abs($pointsDifference) >= 2;
         if ($gameIsOver) {
-            return "Win for $winner";
+            return "Win for $winning";
         }
 
         return $score;
