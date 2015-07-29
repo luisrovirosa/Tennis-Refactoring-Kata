@@ -25,6 +25,7 @@ class TennisGame implements BaseTennisGame
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function getScore()
     {
@@ -36,22 +37,12 @@ class TennisGame implements BaseTennisGame
         throw new \Exception('Rule not defined');
     }
 
-    private function P1Score()
+    public function wonPoint($playerName)
     {
-        $this->firstPlayer->winPoint();
-    }
-
-    private function P2Score()
-    {
-        $this->secondPlayer->winPoint();
-    }
-
-    public function wonPoint($player)
-    {
-        if ($player == $this->firstPlayer->name()) {
-            $this->P1Score();
+        if ($playerName == $this->firstPlayer->name()) {
+            $this->firstPlayer->winPoint();
         } else {
-            $this->P2Score();
+            $this->secondPlayer->winPoint();
         }
     }
 

@@ -20,9 +20,9 @@ class TennisGame implements BaseTennisGame
         $this->result = new Result($this->firstPlayer, $this->secondPlayer);
     }
 
-    public function wonPoint($playerName)
+    public function wonPoint($playerNameName)
     {
-        $isFirstPlayer = $this->firstPlayer->name() == $playerName;
+        $isFirstPlayer = $this->firstPlayer->name() == $playerNameName;
         if ($isFirstPlayer) {
             $this->firstPlayer->wonPoint();
         } else {

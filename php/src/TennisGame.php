@@ -4,10 +4,10 @@ namespace TennisRefactoringKata;
 interface TennisGame
 {
     /**
-     * @param  $playerName
+     * @param  $playerNameName
      * @return void
      */
-    public function wonPoint($playerName);
+    public function wonPoint($playerNameName);
 
     /**
      * @return string
