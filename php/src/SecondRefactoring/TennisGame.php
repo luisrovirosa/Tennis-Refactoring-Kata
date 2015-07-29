@@ -22,10 +22,10 @@ class TennisGame implements BaseTennisGame
         ) {
             $scores = ['Love-All', 'Fifteen-All', 'Thirty-All', 'Deuce'];
             $points = min(3, $this->firstPlayer->score());
-            $score = $scores[$points];
+            return $scores[$points];
         }
 
-        if ($this->firstPlayer->score() > 0 && $this->secondPlayer->score() == 0) {
+        if ($this->firstPlayer->score() > 0) {
             if ($this->firstPlayer->score() == 1) {
                 $p1res = "Fifteen";
             }
@@ -102,16 +102,14 @@ class TennisGame implements BaseTennisGame
             $score = "Advantage player2";
         }
 
-        if ($this->firstPlayer->score() >= 4 && $this->secondPlayer->score(
-            ) >= 0 && ($this->firstPlayer->score() - $this->secondPlayer->score()) >= 2
-        ) {
-            $score = "Win for player1";
-        }
+        $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
 
-        if ($this->secondPlayer->score() >= 4 && $this->firstPlayer->score(
-            ) >= 0 && ($this->secondPlayer->score() - $this->firstPlayer->score()) >= 2
-        ) {
-            $score = "Win for player2";
+        $gameIsOver = ($this->firstPlayer->score() >= 4 || $this->secondPlayer->score() >= 4)
+            && abs($pointsDifference) >= 2;
+        if ($gameIsOver) {
+            $winner = $this->firstPlayer->score() > $this->secondPlayer->score(
+            ) ? 'player1' : 'player2';
+            return "Win for $winner";
         }
 
         return $score;
