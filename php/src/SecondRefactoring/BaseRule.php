@@ -4,10 +4,13 @@ namespace TennisRefactoringKata\SecondRefactoring;
 
 abstract class BaseRule implements Rule
 {
+    const FORTY_POINTS = 3;
+
     /**
      * @var Player
      */
     protected $firstPlayer;
+
     /**
      * @var Player
      */
@@ -41,7 +44,8 @@ abstract class BaseRule implements Rule
      */
     protected function someoneHaveWinMoreThan($points)
     {
-        return ($this->firstPlayer->score() >= $points || $this->secondPlayer->score() >= $points);
+        return ($this->firstPlayer->morePointsThan($points) ||
+            $this->secondPlayer->morePointsThan($points));
     }
 
     /**

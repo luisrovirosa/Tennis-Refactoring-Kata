@@ -35,4 +35,13 @@ class Player
     {
         return $this->playerName;
     }
+
+    /**
+     * @param int $points
+     * @return bool
+     */
+    public function morePointsThan($points)
+    {
+        return $this->score > $points;
+    }
 }

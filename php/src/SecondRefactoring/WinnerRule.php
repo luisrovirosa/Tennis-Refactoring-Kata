@@ -10,7 +10,8 @@ class WinnerRule extends BaseRule
      */
     public function match()
     {
-        return $this->someoneHaveWinMoreThan(4) && $this->moreThanOnePointOfDifference();
+        return ($this->someoneHaveWinMoreThan(self::FORTY_POINTS) &&
+            $this->moreThanOnePointOfDifference());
     }
 
     /**
