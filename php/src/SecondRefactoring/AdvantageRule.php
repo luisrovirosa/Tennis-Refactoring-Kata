@@ -12,10 +12,7 @@ class AdvantageRule extends BaseRule
 
     public function text()
     {
-        $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
-        ) ? 'player1' : 'player2';
-
-        return "Advantage $winning";
+        return "Advantage " . $this->winning();
     }
 
     /**

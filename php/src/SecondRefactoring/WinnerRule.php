@@ -18,10 +18,7 @@ class WinnerRule extends BaseRule
      */
     public function text()
     {
-        $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
-        ) ? 'player1' : 'player2';
-
-        return "Win for $winning";
+        return "Win for " . $this->winning();
     }
 
     /**
@@ -41,4 +38,5 @@ class WinnerRule extends BaseRule
         $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
         return abs($pointsDifference) >= 2;
     }
+
 }

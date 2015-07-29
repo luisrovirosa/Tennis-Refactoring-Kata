@@ -21,4 +21,14 @@ abstract class BaseRule implements Rule
         $this->firstPlayer = $firstPlayer;
         $this->secondPlayer = $secondPlayer;
     }
+
+    /**
+     * @return string
+     */
+    protected function winning()
+    {
+        $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
+        ) ? 'player1' : 'player2';
+        return $winning;
+    }
 }
