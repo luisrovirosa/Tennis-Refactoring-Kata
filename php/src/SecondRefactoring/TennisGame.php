@@ -16,57 +16,11 @@ class TennisGame implements BaseTennisGame
 
     public function getScore()
     {
-        $p2res = $score = '';
         $sameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
         if ($sameScore) {
             $scores = ['Love-All', 'Fifteen-All', 'Thirty-All', 'Deuce'];
             $points = min(3, $this->firstPlayer->score());
             return $scores[$points];
-        }
-
-        $scores = ['Love', 'Fifteen', 'Thirty', 'Forty'];
-        $p1res = $scores[min(3, $this->firstPlayer->score())];
-
-        if ($this->firstPlayer->score() > 0) {
-            $p2res = "Love";
-            $score = "{$p1res}-{$p2res}";
-        }
-
-        if ($this->secondPlayer->score() > 0 && $this->firstPlayer->score() == 0) {
-            if ($this->secondPlayer->score() == 1) {
-                $p2res = "Fifteen";
-            }
-            if ($this->secondPlayer->score() == 2) {
-                $p2res = "Thirty";
-            }
-            if ($this->secondPlayer->score() == 3) {
-                $p2res = "Forty";
-            }
-            $score = "{$p1res}-{$p2res}";
-        }
-
-        if ($this->firstPlayer->score() > $this->secondPlayer->score() && $this->firstPlayer->score(
-            ) < 4
-        ) {
-            if ($this->secondPlayer->score() == 1) {
-                $p2res = "Fifteen";
-            }
-            if ($this->secondPlayer->score() == 2) {
-                $p2res = "Thirty";
-            }
-            $score = "{$p1res}-{$p2res}";
-        }
-
-        if ($this->secondPlayer->score() > $this->firstPlayer->score(
-            ) && $this->secondPlayer->score() < 4
-        ) {
-            if ($this->secondPlayer->score() == 2) {
-                $p2res = "Thirty";
-            }
-            if ($this->secondPlayer->score() == 3) {
-                $p2res = "Forty";
-            }
-            $score = "{$p1res}-{$p2res}";
         }
 
         $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
@@ -83,7 +37,11 @@ class TennisGame implements BaseTennisGame
             return "Win for $winning";
         }
 
-        return $score;
+        $scores = ['Love', 'Fifteen', 'Thirty', 'Forty'];
+        $p1res = $scores[min(3, $this->firstPlayer->score())];
+        $p2res = $scores[min(3, $this->secondPlayer->score())];
+
+        return "{$p1res}-{$p2res}";
     }
 
     private function P1Score()
