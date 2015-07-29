@@ -32,7 +32,7 @@ abstract class BaseRule implements Rule
      */
     protected function winningName()
     {
-        $winningPlayer = $this->firstPlayer->score() > $this->secondPlayer->score() ?
+        $winningPlayer = $this->firstPlayer->isWinning($this->secondPlayer) ?
             $this->firstPlayer : $this->secondPlayer;
 
         return $winningPlayer->name();

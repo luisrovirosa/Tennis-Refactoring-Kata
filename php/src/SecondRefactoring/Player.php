@@ -44,4 +44,9 @@ class Player
     {
         return $this->score > $points;
     }
+
+    public function isWinning(Player $secondPlayer)
+    {
+        return $this->score > $secondPlayer->score;
+    }
 }
