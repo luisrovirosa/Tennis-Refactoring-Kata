@@ -2,25 +2,8 @@
 
 namespace TennisRefactoringKata\SecondRefactoring;
 
-class SameScoreRule implements Rule
+class SameScoreRule extends BaseRule
 {
-    /**
-     * @var Player
-     */
-    private $firstPlayer;
-    /**
-     * @var Player
-     */
-    private $secondPlayer;
-
-    /**
-     * SameScoreRule constructor.
-     */
-    public function __construct(Player $firstPlayer, Player $secondPlayer)
-    {
-        $this->firstPlayer = $firstPlayer;
-        $this->secondPlayer = $secondPlayer;
-    }
 
     public function match()
     {
