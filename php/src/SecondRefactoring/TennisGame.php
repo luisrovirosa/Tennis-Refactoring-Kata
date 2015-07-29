@@ -8,7 +8,7 @@ class TennisGame implements BaseTennisGame
     private $firstPlayer;
     private $secondPlayer;
 
-    /** @var SameScoreRule[] */
+    /** @var Rule[] */
     private $rules;
 
     public function __construct($player1Name, $player2Name)

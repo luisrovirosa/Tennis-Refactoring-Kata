@@ -2,7 +2,7 @@
 
 namespace TennisRefactoringKata\SecondRefactoring;
 
-class SameScoreRule
+class SameScoreRule implements Rule
 {
     /**
      * @var Player

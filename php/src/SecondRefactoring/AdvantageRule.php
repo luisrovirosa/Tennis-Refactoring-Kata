@@ -2,7 +2,7 @@
 
 namespace TennisRefactoringKata\SecondRefactoring;
 
-class AdvantageRule
+class AdvantageRule implements Rule
 {
     /**
      * @var Player
