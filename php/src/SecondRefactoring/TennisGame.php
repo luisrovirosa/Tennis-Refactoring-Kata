@@ -17,23 +17,14 @@ class TennisGame implements BaseTennisGame
     public function getScore()
     {
         $p1res = $p2res = $score = '';
-        if ($this->firstPlayer->score() == $this->secondPlayer->score(
-            ) && $this->firstPlayer->score() < 4
+        $sameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
+        if ($sameScore && $this->firstPlayer->score() < 4
         ) {
-            if ($this->firstPlayer->score() == 0) {
-                $score = "Love";
-            }
-            if ($this->firstPlayer->score() == 1) {
-                $score = "Fifteen";
-            }
-            if ($this->firstPlayer->score() == 2) {
-                $score = "Thirty";
-            }
-            $score .= "-All";
+            $scores = ['Love-All', 'Fifteen-All', 'Thirty-All', 'Deuce'];
+            $score = $scores[$this->firstPlayer->score()];
         }
 
-        if ($this->firstPlayer->score() == $this->secondPlayer->score(
-            ) && $this->firstPlayer->score() >= 3
+        if ($sameScore && $this->firstPlayer->score() >= 3
         ) {
             $score = "Deuce";
         }

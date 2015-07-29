@@ -6,6 +6,17 @@ class Player
 {
     /** @var  int */
     private $score;
+    private $playerName;
+
+    /**
+     * Player constructor.
+     * @param $playerName
+     */
+    public function __construct($playerName)
+    {
+        $this->playerName = $playerName;
+        $this->score = 0;
+    }
 
     public function winPoint()
     {
