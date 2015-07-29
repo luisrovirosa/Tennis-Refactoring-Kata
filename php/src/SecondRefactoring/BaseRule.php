@@ -31,4 +31,22 @@ abstract class BaseRule implements Rule
         ) ? 'player1' : 'player2';
         return $winning;
     }
+
+    /**
+     * @param $points
+     * @return bool
+     */
+    protected function someoneHaveWinMoreThan($points)
+    {
+        return ($this->firstPlayer->score() >= $points || $this->secondPlayer->score() >= $points);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function moreThanOnePointOfDifference()
+    {
+        $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
+        return abs($pointsDifference) >= 2;
+    }
 }
