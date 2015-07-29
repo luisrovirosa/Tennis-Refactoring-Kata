@@ -1,6 +1,8 @@
 <?php
 
-namespace TennisRefactoringKata\SecondRefactoring;
+namespace TennisRefactoringKata\SecondRefactoring\Rules;
+
+use TennisRefactoringKata\SecondRefactoring\Player;
 
 abstract class BaseRule implements Rule
 {

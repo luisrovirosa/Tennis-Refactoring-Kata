@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisRefactoringKata\SecondRefactoring;
+namespace TennisRefactoringKata\SecondRefactoring\Rules;
 
 class WinnerRule extends BaseRule
 {

@@ -1,6 +1,11 @@
 <?php
 namespace TennisRefactoringKata\SecondRefactoring;
 
+use TennisRefactoringKata\SecondRefactoring\Rules\AdvantageRule;
+use TennisRefactoringKata\SecondRefactoring\Rules\NormalRule;
+use TennisRefactoringKata\SecondRefactoring\Rules\Rule;
+use TennisRefactoringKata\SecondRefactoring\Rules\SameScoreRule;
+use TennisRefactoringKata\SecondRefactoring\Rules\WinnerRule;
 use TennisRefactoringKata\TennisGame as BaseTennisGame;
 
 class TennisGame implements BaseTennisGame
