@@ -16,7 +16,8 @@ class TennisGame implements BaseTennisGame
         $this->firstPlayer = new Player($player1Name);
         $this->secondPlayer = new Player($player2Name);
         $this->rules = [
-            new SameScoreRule($this->firstPlayer, $this->secondPlayer)
+            new SameScoreRule($this->firstPlayer, $this->secondPlayer),
+            new AdvantageRule($this->firstPlayer, $this->secondPlayer)
         ];
     }
 
@@ -27,11 +28,6 @@ class TennisGame implements BaseTennisGame
             if ($rule->match()) {
                 return $rule->text();
             }
-        }
-
-        $isAdvantage = $this->someoneHaveWinMoreThan(4) && !$this->moreThanOnePointOfDifference();
-        if ($isAdvantage) {
-            return $this->advantageText();
         }
 
         $gameIsOver = $this->someoneHaveWinMoreThan(4) && $this->moreThanOnePointOfDifference();
@@ -77,18 +73,6 @@ class TennisGame implements BaseTennisGame
     {
         $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
         return abs($pointsDifference) >= 2;
-    }
-
-    /**
-     * @param $winning
-     * @return string
-     */
-    private function advantageText()
-    {
-        $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
-        ) ? 'player1' : 'player2';
-
-        return "Advantage $winning";
     }
 
     /**
