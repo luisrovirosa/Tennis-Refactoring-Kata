@@ -12,7 +12,7 @@ class AdvantageRule extends BaseRule
 
     public function text()
     {
-        return "Advantage " . $this->winning();
+        return "Advantage " . $this->winningName();
     }
 
 }

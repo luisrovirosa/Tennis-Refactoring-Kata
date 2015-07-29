@@ -27,11 +27,12 @@ abstract class BaseRule implements Rule
     /**
      * @return string
      */
-    protected function winning()
+    protected function winningName()
     {
-        $winning = $this->firstPlayer->score() > $this->secondPlayer->score(
-        ) ? 'player1' : 'player2';
-        return $winning;
+        $winningPlayer = $this->firstPlayer->score() > $this->secondPlayer->score() ?
+            $this->firstPlayer : $this->secondPlayer;
+
+        return $winningPlayer->name();
     }
 
     /**

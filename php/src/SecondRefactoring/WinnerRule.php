@@ -18,7 +18,7 @@ class WinnerRule extends BaseRule
      */
     public function text()
     {
-        return "Win for " . $this->winning();
+        return "Win for " . $this->winningName();
     }
 
 }
