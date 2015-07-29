@@ -18,20 +18,22 @@ class TennisGame implements BaseTennisGame
         $this->rules = [
             new SameScoreRule($this->firstPlayer, $this->secondPlayer),
             new AdvantageRule($this->firstPlayer, $this->secondPlayer),
-            new WinnerRule($this->firstPlayer, $this->secondPlayer)
+            new WinnerRule($this->firstPlayer, $this->secondPlayer),
+            new NormalRule($this->firstPlayer, $this->secondPlayer)
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getScore()
     {
-
         foreach ($this->rules as $rule) {
             if ($rule->match()) {
                 return $rule->text();
             }
         }
-
-        return $this->normalText();
+        throw new \Exception('Rule not defined');
     }
 
     private function P1Score()
@@ -53,15 +55,4 @@ class TennisGame implements BaseTennisGame
         }
     }
 
-    /**
-     * @return string
-     */
-    private function normalText()
-    {
-        $scores = ['Love', 'Fifteen', 'Thirty', 'Forty'];
-        $p1res = $scores[min(3, $this->firstPlayer->score())];
-        $p2res = $scores[min(3, $this->secondPlayer->score())];
-
-        return "{$p1res}-{$p2res}";
-    }
 }
