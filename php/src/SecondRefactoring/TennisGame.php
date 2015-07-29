@@ -132,20 +132,6 @@ class TennisGame implements BaseTennisGame
         return $score;
     }
 
-    private function SetP1Score($number)
-    {
-        for ($i = 0; $i < $number; $i++) {
-            $this->P1Score();
-        }
-    }
-
-    private function SetP2Score($number)
-    {
-        for ($i = 0; $i < $number; $i++) {
-            $this->P2Score();
-        }
-    }
-
     private function P1Score()
     {
         $this->firstPlayer->winPoint();
