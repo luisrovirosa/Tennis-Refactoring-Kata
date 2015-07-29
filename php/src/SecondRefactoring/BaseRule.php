@@ -15,6 +15,8 @@ abstract class BaseRule implements Rule
 
     /**
      * SameScoreRule constructor.
+     * @param Player $firstPlayer
+     * @param Player $secondPlayer
      */
     public function __construct(Player $firstPlayer, Player $secondPlayer)
     {
