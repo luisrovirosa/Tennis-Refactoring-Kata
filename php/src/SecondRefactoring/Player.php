@@ -30,4 +30,9 @@ class Player
     {
         return $this->score;
     }
+
+    public function name()
+    {
+        return $this->playerName;
+    }
 }

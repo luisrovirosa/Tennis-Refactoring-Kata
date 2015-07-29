@@ -46,7 +46,7 @@ class TennisGame implements BaseTennisGame
 
     public function wonPoint($player)
     {
-        if ($player == "player1") {
+        if ($player == $this->firstPlayer->name()) {
             $this->P1Score();
         } else {
             $this->P2Score();
