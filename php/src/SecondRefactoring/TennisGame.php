@@ -5,8 +5,6 @@ use TennisRefactoringKata\TennisGame as BaseTennisGame;
 
 class TennisGame implements BaseTennisGame
 {
-    private $P1res = "";
-    private $P2res = "";
     private $firstPlayer;
     private $secondPlayer;
 
@@ -18,7 +16,7 @@ class TennisGame implements BaseTennisGame
 
     public function getScore()
     {
-        $score = "";
+        $p1res = $p2res = $score = '';
         if ($this->firstPlayer->score() == $this->secondPlayer->score(
             ) && $this->firstPlayer->score() < 4
         ) {
@@ -42,67 +40,67 @@ class TennisGame implements BaseTennisGame
 
         if ($this->firstPlayer->score() > 0 && $this->secondPlayer->score() == 0) {
             if ($this->firstPlayer->score() == 1) {
-                $this->P1res = "Fifteen";
+                $p1res = "Fifteen";
             }
             if ($this->firstPlayer->score() == 2) {
-                $this->P1res = "Thirty";
+                $p1res = "Thirty";
             }
             if ($this->firstPlayer->score() == 3) {
-                $this->P1res = "Forty";
+                $p1res = "Forty";
             }
 
-            $this->P2res = "Love";
-            $score = "{$this->P1res}-{$this->P2res}";
+            $p2res = "Love";
+            $score = "{$p1res}-{$p2res}";
         }
 
         if ($this->secondPlayer->score() > 0 && $this->firstPlayer->score() == 0) {
             if ($this->secondPlayer->score() == 1) {
-                $this->P2res = "Fifteen";
+                $p2res = "Fifteen";
             }
             if ($this->secondPlayer->score() == 2) {
-                $this->P2res = "Thirty";
+                $p2res = "Thirty";
             }
             if ($this->secondPlayer->score() == 3) {
-                $this->P2res = "Forty";
+                $p2res = "Forty";
             }
-            $this->P1res = "Love";
-            $score = "{$this->P1res}-{$this->P2res}";
+            $p1res = "Love";
+            $score = "{$p1res}-{$p2res}";
         }
 
         if ($this->firstPlayer->score() > $this->secondPlayer->score() && $this->firstPlayer->score(
             ) < 4
         ) {
             if ($this->firstPlayer->score() == 2) {
-                $this->P1res = "Thirty";
+                $p1res = "Thirty";
             }
             if ($this->firstPlayer->score() == 3) {
-                $this->P1res = "Forty";
+                $p1res = "Forty";
             }
             if ($this->secondPlayer->score() == 1) {
-                $this->P2res = "Fifteen";
+                $p2res = "Fifteen";
             }
             if ($this->secondPlayer->score() == 2) {
-                $this->P2res = "Thirty";
+                $p2res = "Thirty";
             }
-            $score = "{$this->P1res}-{$this->P2res}";
+            $score = "{$p1res}-{$p2res}";
         }
 
         if ($this->secondPlayer->score() > $this->firstPlayer->score(
             ) && $this->secondPlayer->score() < 4
         ) {
             if ($this->secondPlayer->score() == 2) {
-                $this->P2res = "Thirty";
+                $p2res = "Thirty";
             }
             if ($this->secondPlayer->score() == 3) {
-                $this->P2res = "Forty";
+                $p2res = "Forty";
             }
             if ($this->firstPlayer->score() == 1) {
-                $this->P1res = "Fifteen";
+                $p1res = "Fifteen";
             }
             if ($this->firstPlayer->score() == 2) {
-                $this->P1res = "Thirty";
+                $p1res = "Thirty";
             }
-            $score = "{$this->P1res}-{$this->P2res}";
+            $score = "{$p1res}-{$p2res}";
         }
 
         if ($this->firstPlayer->score() > $this->secondPlayer->score(
