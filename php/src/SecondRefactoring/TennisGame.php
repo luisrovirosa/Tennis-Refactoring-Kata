@@ -27,12 +27,12 @@ class TennisGame implements BaseTennisGame
         ) ? 'player1' : 'player2';
         $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
 
-        $isAdvantage = $this->bothHaveWinMoreThan(4) && abs($pointsDifference) < 2;
+        $isAdvantage = $this->someoneHaveWinMoreThan(4) && abs($pointsDifference) < 2;
         if ($isAdvantage) {
             return "Advantage $winning";
         }
 
-        $gameIsOver = $this->bothHaveWinMoreThan(4) && abs($pointsDifference) >= 2;
+        $gameIsOver = $this->someoneHaveWinMoreThan(4) && abs($pointsDifference) >= 2;
         if ($gameIsOver) {
             return "Win for $winning";
         }
@@ -67,7 +67,7 @@ class TennisGame implements BaseTennisGame
      * @param $points
      * @return bool
      */
-    private function bothHaveWinMoreThan($points)
+    private function someoneHaveWinMoreThan($points)
     {
         return ($this->firstPlayer->score() >= $points || $this->secondPlayer->score() >= $points);
     }
