@@ -18,15 +18,11 @@ class TennisGame implements BaseTennisGame
     {
         $p1res = $p2res = $score = '';
         $sameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
-        if ($sameScore && $this->firstPlayer->score() < 4
+        if ($sameScore
         ) {
             $scores = ['Love-All', 'Fifteen-All', 'Thirty-All', 'Deuce'];
-            $score = $scores[$this->firstPlayer->score()];
-        }
-
-        if ($sameScore && $this->firstPlayer->score() >= 3
-        ) {
-            $score = "Deuce";
+            $points = min(3, $this->firstPlayer->score());
+            $score = $scores[$points];
         }
 
         if ($this->firstPlayer->score() > 0 && $this->secondPlayer->score() == 0) {
