@@ -16,7 +16,7 @@ class TennisGame implements BaseTennisGame
 
     public function getScore()
     {
-        $p1res = $p2res = $score = '';
+        $p2res = $score = '';
         $sameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
         if ($sameScore) {
             $scores = ['Love-All', 'Fifteen-All', 'Thirty-All', 'Deuce'];
@@ -24,17 +24,10 @@ class TennisGame implements BaseTennisGame
             return $scores[$points];
         }
 
-        if ($this->firstPlayer->score() > 0) {
-            if ($this->firstPlayer->score() == 1) {
-                $p1res = "Fifteen";
-            }
-            if ($this->firstPlayer->score() == 2) {
-                $p1res = "Thirty";
-            }
-            if ($this->firstPlayer->score() == 3) {
-                $p1res = "Forty";
-            }
+        $scores = ['Love', 'Fifteen', 'Thirty', 'Forty'];
+        $p1res = $scores[min(3, $this->firstPlayer->score())];
 
+        if ($this->firstPlayer->score() > 0) {
             $p2res = "Love";
             $score = "{$p1res}-{$p2res}";
         }
@@ -49,19 +42,12 @@ class TennisGame implements BaseTennisGame
             if ($this->secondPlayer->score() == 3) {
                 $p2res = "Forty";
             }
-            $p1res = "Love";
             $score = "{$p1res}-{$p2res}";
         }
 
         if ($this->firstPlayer->score() > $this->secondPlayer->score() && $this->firstPlayer->score(
             ) < 4
         ) {
-            if ($this->firstPlayer->score() == 2) {
-                $p1res = "Thirty";
-            }
-            if ($this->firstPlayer->score() == 3) {
-                $p1res = "Forty";
-            }
             if ($this->secondPlayer->score() == 1) {
                 $p2res = "Fifteen";
             }
@@ -79,12 +65,6 @@ class TennisGame implements BaseTennisGame
             }
             if ($this->secondPlayer->score() == 3) {
                 $p2res = "Forty";
-            }
-            if ($this->firstPlayer->score() == 1) {
-                $p1res = "Fifteen";
-            }
-            if ($this->firstPlayer->score() == 2) {
-                $p1res = "Thirty";
             }
             $score = "{$p1res}-{$p2res}";
         }
