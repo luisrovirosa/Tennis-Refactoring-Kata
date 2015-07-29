@@ -18,8 +18,7 @@ class TennisGame implements BaseTennisGame
     {
         $p1res = $p2res = $score = '';
         $sameScore = $this->firstPlayer->score() == $this->secondPlayer->score();
-        if ($sameScore
-        ) {
+        if ($sameScore) {
             $scores = ['Love-All', 'Fifteen-All', 'Thirty-All', 'Deuce'];
             $points = min(3, $this->firstPlayer->score());
             return $scores[$points];
@@ -90,25 +89,16 @@ class TennisGame implements BaseTennisGame
             $score = "{$p1res}-{$p2res}";
         }
 
-        if ($this->firstPlayer->score() > $this->secondPlayer->score(
-            ) && $this->secondPlayer->score() >= 3
-        ) {
-            $score = "Advantage player1";
-        }
-
-        if ($this->secondPlayer->score() > $this->firstPlayer->score() && $this->firstPlayer->score(
-            ) >= 3
-        ) {
-            $score = "Advantage player2";
+        $winner = $this->firstPlayer->score() > $this->secondPlayer->score(
+        ) ? 'player1' : 'player2';
+        if ($this->bothHaveWinMoreThan(4)) {
+            $score = "Advantage $winner";
         }
 
         $pointsDifference = $this->firstPlayer->score() - $this->secondPlayer->score();
 
-        $gameIsOver = ($this->firstPlayer->score() >= 4 || $this->secondPlayer->score() >= 4)
-            && abs($pointsDifference) >= 2;
+        $gameIsOver = $this->bothHaveWinMoreThan(4) && abs($pointsDifference) >= 2;
         if ($gameIsOver) {
-            $winner = $this->firstPlayer->score() > $this->secondPlayer->score(
-            ) ? 'player1' : 'player2';
             return "Win for $winner";
         }
 
@@ -132,5 +122,14 @@ class TennisGame implements BaseTennisGame
         } else {
             $this->P2Score();
         }
+    }
+
+    /**
+     * @param $points
+     * @return bool
+     */
+    private function bothHaveWinMoreThan($points)
+    {
+        return ($this->firstPlayer->score() >= $points || $this->secondPlayer->score() >= $points);
     }
 }
